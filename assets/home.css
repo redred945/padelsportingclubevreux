@@ -107,16 +107,32 @@ body.concept{ background:var(--navy-950); position:relative; }
    Both lines animate transform/filter (motion) and background-position
    (hue) on separate animations so every frame stays inside light tones
    (white → cream → gold) — contrast against the dark hero photo never
-   drops, even mid-animation. ---------- */
+   drops, even mid-animation.
+   Once the impact/sweep settle, a third animation per line (heroLineShimmer /
+   heroTitleGoldShimmer) takes over the very same background-position
+   property — no new gradient, no transform, just an occasional glint
+   passing through the letters. It is deliberately tempered: a sub-second
+   pass followed by several seconds of stillness, not a constant sheen
+   (see review note near the reduced-motion block below for the reasoning).
+   The two lines share one 6.4s cycle but start at different delays so the
+   glint reaches line 2 slightly after line 1, echoing the load-in's own
+   "light travels from line 1 to line 2" choreography on every repeat.
+   fill-mode is deliberately left at its default (not "both"): each shimmer
+   animation must stay inert until its own delay has elapsed, otherwise its
+   backwards-fill would freeze the property during the load-in itself and
+   the impact/sweep would never be seen. ---------- */
 .c-hero h1 .c-hero-line{
   display:inline-block;
-  background:linear-gradient(100deg,
-    #ffffff 0%, #ffffff 28%, #fff6cf 42%, var(--yellow-bright) 48%, #fff6cf 54%, #ffffff 68%, #ffffff 100%);
+  /* "Jouez fort." stays pure white at every frame — the flash/glint here
+     is a brightness bloom (drop-shadow, below) only, never a hue shift.
+     Gold is reserved for "Progressez plus vite." alone. */
+  background:linear-gradient(100deg, #ffffff 0%, #ffffff 100%);
   background-size:300% 100%;
   -webkit-background-clip:text; background-clip:text; color:transparent;
   animation:
     heroLineImpact .56s cubic-bezier(.16,1,.3,1) 0s 1 both,
-    heroTitleSweep .7s var(--ease) .05s 1 both;
+    heroTitleSweep .7s var(--ease) .05s 1 both,
+    heroLineShimmer 6.4s var(--ease) .75s infinite;
 }
 .c-hero h1 em{
   display:inline-block;
@@ -127,7 +143,8 @@ body.concept{ background:var(--navy-950); position:relative; }
   -webkit-background-clip:text; background-clip:text; color:transparent;
   animation:
     heroLineDash .7s cubic-bezier(.12,.9,.2,1) .3s 1 both,
-    heroTitleGold .95s var(--ease) .34s 1 both;
+    heroTitleGold .95s var(--ease) .34s 1 both,
+    heroTitleGoldShimmer 6.4s var(--ease) 1.29s infinite;
 }
 .c-hero h1::after{
   content:"";
@@ -169,7 +186,30 @@ body.concept{ background:var(--navy-950); position:relative; }
   80%{ opacity:.3; transform:translate(-50%,-50%) scale(1.08); }
   100%{ opacity:0; transform:translate(-50%,-50%) scale(1.16); }
 }
+/* ---------- ongoing shimmer (post load-in only) : the club asked for the
+   light to keep passing over the title after it lands. A constant, obvious
+   sheen was deliberately avoided — on a hero this busy (mesh glow, live
+   status pill, plus the impact/sweep it just played) a permanent moving
+   highlight reads as a cheap "shiny text" tutorial trick and becomes
+   wallpaper noise on a screen people linger on or scroll back to. Instead:
+   a quick (<1s) glint then ~5.5s of stillness, repeating — same restraint
+   as a premium watch dial catching light, not a loading shimmer. Only
+   background-position (and a faint drop-shadow) move; no transform, so the
+   settled letters never look "unstable". ---------- */
+@keyframes heroLineShimmer{
+  0%, 5%{ background-position:0% 0; filter:drop-shadow(0 0 0 rgba(255,246,207,0)); }
+  9%{ background-position:46% 0; filter:drop-shadow(0 0 10px rgba(255,246,207,.5)); }
+  14%, 100%{ background-position:0% 0; filter:drop-shadow(0 0 0 rgba(255,246,207,0)); }
+}
+@keyframes heroTitleGoldShimmer{
+  0%, 5%{ background-position:0% 0; filter:drop-shadow(0 0 0 rgba(255,255,255,0)); }
+  9%{ background-position:34% 0; filter:drop-shadow(0 0 10px rgba(255,255,255,.4)); }
+  14%, 100%{ background-position:0% 0; filter:drop-shadow(0 0 0 rgba(255,255,255,0)); }
+}
 @media (prefers-reduced-motion: reduce){
+  /* animation:none clears the whole list (impact/sweep/dash/gold AND the
+     infinite shimmer) — reduced-motion visitors get the static final
+     frame only: line 1 white, line 2 gold, zero ongoing motion. */
   .c-hero h1 .c-hero-line{ animation:none; background-position:0% 0; }
   .c-hero h1 em{ animation:none; background-position:0% 0; }
   .c-hero h1::after{ animation:none; opacity:0; }
