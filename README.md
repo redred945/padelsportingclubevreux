@@ -19,12 +19,14 @@ direction artistique part de là. Fond marine profond `#0c0f1f` / `#171d36`, jau
 
 ## Stack
 
-- `index.html` — page d'accueil : Hero / Stats / Complexe / Activités / Restauration / Tarifs / Crédits / Cours / Séminaires / Partenaires / Application / Nous situer
+- `index.html` — page d'accueil : Hero / Complexe / Activités / Restauration / Tarifs / Crédits / Cours / Séminaires / Partenaires / Application / Nous situer
 - `contact.html` — formulaire de contact (séminaire, partenariat, question générale) + plan
 - `mentions-legales.html` — obligation légale ; **contient des champs `[à compléter]`**
 - `robots.txt` / `sitemap.xml`
-- `assets/styles.css` — design system complet (tokens, composants, responsive)
-- `assets/main.js` — header au scroll, menu mobile (focus trap), nav active, reveals, compteurs, parallaxe
+- `assets/styles.css` — tokens & reset partagés (couleurs, typo, `.skip-link`, `::selection`)
+- `assets/home.css` — design system « Saaspo x Padel » (bento grid, glassmorphism, nav flottante) : chargé par les 3 pages
+- `assets/home.js` — nav flottante/menu mobile, spotlight au survol, reveals au scroll, compteurs animés, simulateur de tarif, cloud de logos partenaires
+- `assets/main.js` — **legacy, non chargé par aucune page** ; ancien header fixe / drawer plein écran, conservé pour référence uniquement
 - `assets/fonts/` — polices **auto-hébergées** (Anton, Inter, JetBrains Mono, sous-ensemble latin) : aucune requête vers Google
 - `assets/img/` — photos réelles du club (reprises du site Squarespace actuel, réoptimisées en WebP, plusieurs largeurs pour le `srcset`)
 - `assets/favicon.svg` — monogramme P jaune sur fond marine

@@ -5,13 +5,32 @@
   const burger = document.getElementById('c-burger');
   const panel = document.getElementById('c-mobile-panel');
   if (burger && panel) {
+    const openPanel = () => {
+      burger.setAttribute('aria-expanded', 'true');
+      burger.setAttribute('aria-label', 'Fermer le menu');
+      panel.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      const first = panel.querySelector('a');
+      if (first) first.focus();
+    };
+    const closePanel = ({ restoreFocus = false } = {}) => {
+      burger.setAttribute('aria-expanded', 'false');
+      burger.setAttribute('aria-label', 'Ouvrir le menu');
+      panel.classList.remove('is-open');
+      document.body.style.overflow = '';
+      if (restoreFocus) burger.focus();
+    };
     burger.addEventListener('click', () => {
-      const open = burger.getAttribute('aria-expanded') === 'true';
-      burger.setAttribute('aria-expanded', String(!open));
-      panel.classList.toggle('is-open', !open);
+      burger.getAttribute('aria-expanded') === 'true' ? closePanel({ restoreFocus: true }) : openPanel();
     });
     panel.addEventListener('click', (e) => {
-      if (e.target.tagName === 'A') { burger.setAttribute('aria-expanded', 'false'); panel.classList.remove('is-open'); }
+      if (e.target.tagName === 'A') closePanel();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && panel.classList.contains('is-open')) closePanel({ restoreFocus: true });
+    });
+    document.addEventListener('click', (e) => {
+      if (panel.classList.contains('is-open') && !panel.contains(e.target) && !burger.contains(e.target)) closePanel();
     });
   }
 

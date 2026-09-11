@@ -65,6 +65,10 @@ body.concept{ background:var(--navy-950); position:relative; }
   box-shadow:0 8px 24px -8px rgba(250,231,137,.6);
 }
 @media (max-width:880px){ .c-nav .c-link{ display:none; } }
+@media (max-width:400px){
+  .c-nav-brand span{ display:none; }
+  .c-nav .c-cta{ padding:9px 14px; font-size:.78rem; }
+}
 
 /* ---------- hero : plein cadre comme le site en prod, traitement en plus ---------- */
 .c-hero{
@@ -116,6 +120,20 @@ body.concept{ background:var(--navy-950); position:relative; }
 }
 .c-hero-status .dot{ width:7px; height:7px; border-radius:50%; background:#6ee7a0; box-shadow:0 0 10px 2px rgba(110,231,160,.7); }
 @media (max-width:760px){ .c-hero-status{ display:none; } }
+
+/* ---------- page hero : shorter, text-only intro used by contact.html
+   and mentions-legales.html so inner pages open on the same floodlit
+   mesh-glow treatment as the homepage hero, without a photo banner. ---------- */
+.c-page-hero{
+  position:relative; overflow:hidden; text-align:center;
+  padding:calc(120px + 4vw) var(--pad) 64px;
+}
+.c-page-hero .c-eyebrow{ justify-content:center; }
+.c-page-hero h1{
+  font-family:var(--f-display); font-weight:400; text-transform:uppercase; line-height:1.02;
+  font-size:clamp(2.4rem, 5.4vw, 4.4rem); color:#fff; max-width:20ch; margin:0 auto;
+}
+.c-page-hero p{ margin:18px auto 0; max-width:52ch; color:var(--ink-dim); font-size:clamp(1rem,1.4vw,1.15rem); }
 
 /* ---------- glass card + spotlight ---------- */
 .glass-card{
@@ -399,6 +417,9 @@ body.concept{ background:var(--navy-950); position:relative; }
 .c-burger[aria-expanded="true"] span:nth-child(1){ transform:translateY(6px) rotate(45deg); }
 .c-burger[aria-expanded="true"] span:nth-child(2){ opacity:0; }
 .c-burger[aria-expanded="true"] span:nth-child(3){ transform:translateY(-6px) rotate(-45deg); }
+/* Panel is only meant to exist below the nav breakpoint; without this rule it
+   rendered as an unstyled stack of links above the hero on desktop. */
+.c-mobile-panel{ display:none; }
 @media (max-width:880px){
   .c-burger{ display:flex; }
   .c-nav{ padding-right:8px; }
@@ -414,15 +435,53 @@ body.concept{ background:var(--navy-950); position:relative; }
   .c-mobile-panel a.c-cta{ background:var(--yellow); color:var(--yellow-ink); text-align:center; margin-top:6px; }
 }
 
-/* ---------- final CTA ---------- */
-.c-cta{ max-width:900px; margin:0 auto; padding:clamp(56px,7vw,90px); text-align:center; }
-.c-cta h2{ font-family:var(--f-display); font-weight:400; text-transform:uppercase; font-size:clamp(2rem,4.4vw,3.4rem); color:var(--ink); }
-.c-cta p{ margin-top:16px; color:var(--ink-dim); }
-.c-cta-actions{ display:flex; gap:14px; justify-content:center; margin-top:32px; flex-wrap:wrap; }
-
 /* ---------- reveal (shared pattern) ---------- */
 .c-reveal{ opacity:0; transform:translateY(26px); transition:opacity .8s var(--ease), transform .8s var(--ease); }
 .c-reveal.is-in{ opacity:1; transform:translateY(0); }
 
 .c-footnote{ text-align:center; padding:40px var(--pad) 80px; color:var(--ink-faint); font-size:.8rem; font-family:var(--f-mono); position:relative; z-index:2; }
 .c-footnote a{ color:var(--yellow); }
+
+/* ---------- form fields (contact) ---------- */
+.c-field{ margin-bottom:20px; }
+.c-field label{
+  display:block; font-family:var(--f-mono); font-size:.74rem; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--ink-faint); margin-bottom:8px;
+}
+.c-field input, .c-field select, .c-field textarea{
+  width:100%; background:var(--glass-bg-light); border:1px solid var(--glass-border); border-radius:10px; color:var(--ink);
+  padding:13px 14px; font:inherit; font-size:.95rem; transition:border-color .2s, background .2s;
+}
+.c-field select{ -webkit-appearance:none; -moz-appearance:none; appearance:none; background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237d84ab' stroke-width='2'><path d='M6 9l6 6 6-6'/></svg>"); background-repeat:no-repeat; background-position:right 14px center; background-size:16px; padding-right:40px; }
+.c-field input:hover, .c-field select:hover, .c-field textarea:hover{ border-color:rgba(238,240,251,.28); }
+.c-field input:focus, .c-field select:focus, .c-field textarea:focus{ outline:2px solid var(--yellow); outline-offset:1px; border-color:var(--yellow); background:rgba(255,255,255,.09); }
+.c-field textarea{ resize:vertical; min-height:130px; }
+.c-form-note{ margin-top:16px; font-size:.8rem; color:var(--ink-faint); }
+
+/* ---------- legal / long-form text pages ---------- */
+.c-legal{ max-width:820px; margin:0 auto; padding:clamp(32px,4vw,56px); }
+.c-legal h2{
+  font-family:var(--f-body); font-weight:700; text-transform:none; letter-spacing:0; line-height:1.3;
+  font-size:1.15rem; color:var(--ink); margin:40px 0 12px;
+}
+.c-legal h2:first-child{ margin-top:0; }
+.c-legal p, .c-legal li{ color:var(--ink-dim); font-size:.94rem; line-height:1.7; }
+.c-legal ul{ margin-top:8px; padding-left:20px; list-style:disc; }
+.c-legal a{ color:var(--yellow); text-decoration:underline; text-underline-offset:2px; }
+.c-legal mark{ background:none; color:var(--yellow-bright); font-weight:600; }
+
+/* ---------- accessible focus states ----------
+   Interactive elements on the glass/navy surfaces need a focus ring that
+   stays visible against both the dark panels and the yellow CTAs. */
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible,
+input:focus-visible, select:focus-visible, textarea:focus-visible{
+  outline:2px solid var(--yellow); outline-offset:3px; border-radius:6px;
+}
+.c-cta:focus-visible, .c-btn-primary:focus-visible, .c-btn-ghost:focus-visible,
+.c-pill:focus-visible, .c-pack:focus-visible, .c-logo-item:focus-within,
+.c-nav-brand:focus-visible, .c-footer-social a:focus-visible{
+  outline-offset:2px; border-radius:999px;
+}
+.c-field input:focus-visible, .c-field select:focus-visible, .c-field textarea:focus-visible{
+  outline-offset:1px; border-radius:10px;
+}
