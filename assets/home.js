@@ -38,7 +38,7 @@
   const packsWrap = document.getElementById('c-packs');
   if (packsWrap) {
     const packs = Array.from(packsWrap.querySelectorAll('.c-pack'));
-    const selectPack = (pack) => packs.forEach(p => p.classList.toggle('is-best', p === pack));
+    const selectPack = (pack) => packs.forEach(p => p.classList.toggle('is-active', p === pack));
     packs.forEach(pack => {
       pack.addEventListener('click', () => selectPack(pack));
       pack.addEventListener('keydown', (e) => {
