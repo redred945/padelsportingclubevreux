@@ -34,19 +34,6 @@
     });
   }
 
-  /* Credits packs: click to feature a different offer */
-  const packsWrap = document.getElementById('c-packs');
-  if (packsWrap) {
-    const packs = Array.from(packsWrap.querySelectorAll('.c-pack'));
-    const selectPack = (pack) => packs.forEach(p => p.classList.toggle('is-active', p === pack));
-    packs.forEach(pack => {
-      pack.addEventListener('click', () => selectPack(pack));
-      pack.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectPack(pack); }
-      });
-    });
-  }
-
   /* Partner logo cloud (grid + seamless marquee) */
   const logoGrid = document.getElementById('c-logo-grid');
   const logoTrack = document.getElementById('c-logo-track');

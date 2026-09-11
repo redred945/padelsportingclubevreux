@@ -276,18 +276,13 @@ body.concept{ background:var(--navy-950); position:relative; }
 @media (max-width:700px){ .c-tarifs-grid{ grid-template-columns:1fr; } }
 
 /* ---------- credits packs ---------- */
-.c-packs-hint{ text-align:center; font-family:var(--f-mono); font-size:.72rem; letter-spacing:.06em; color:var(--ink-faint); margin:0 0 28px; }
-.c-packs{ max-width:1160px; margin:0 auto; display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+.c-packs{ max-width:1160px; margin:32px auto 0; display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
 .c-pack{
-  padding:26px 24px; position:relative; z-index:1; cursor:pointer;
-  transition:border-color .3s, transform .3s var(--ease), box-shadow .3s var(--ease), z-index 0s;
+  padding:26px 24px; position:relative;
+  transition:transform .3s var(--ease), box-shadow .3s var(--ease);
 }
-.c-pack:hover{ transform:translateY(-4px); }
+.c-pack:hover{ transform:translateY(-4px); box-shadow:0 20px 50px -24px rgba(250,231,137,.3); }
 .c-pack--popular{ border-color:rgba(250,231,137,.6); box-shadow:0 20px 50px -24px rgba(250,231,137,.4); }
-.c-pack.is-active{
-  z-index:2; transform:translateY(-4px);
-  border-color:rgba(250,231,137,.75); box-shadow:0 26px 60px -20px rgba(250,231,137,.5);
-}
 .c-pack-tag{
   display:inline-flex; align-self:flex-start; background:var(--yellow); color:var(--yellow-ink); font-family:var(--f-mono);
   font-size:.64rem; letter-spacing:.08em; padding:5px 12px; border-radius:999px; text-transform:uppercase; font-weight:700;
@@ -487,7 +482,6 @@ input:focus-visible, select:focus-visible, textarea:focus-visible{
 .c-pill:focus-visible, .c-nav-brand:focus-visible, .c-footer-social a:focus-visible{
   outline-offset:2px; border-radius:999px;
 }
-.c-pack:focus-visible{ outline-offset:2px; border-radius:20px; }
 .c-logo-item:focus-within{ outline-offset:-2px; border-radius:8px; }
 .c-field input:focus-visible, .c-field select:focus-visible, .c-field textarea:focus-visible{
   outline-offset:1px; border-radius:10px;
