@@ -340,9 +340,11 @@ section{position:relative}
 
 /* ---------- price simulator ---------- */
 .simulator{
-  background:var(--navy-950);border-radius:22px;padding:clamp(28px,4vw,44px);
+  background:var(--navy-950);color:var(--ink);border-radius:22px;padding:clamp(28px,4vw,44px);
   margin-bottom:48px;border:1px solid rgba(23,29,54,.08);
 }
+.sim-value{color:var(--ink)}
+.sim-step{color:var(--ink)}
 .sim-head h3{color:var(--ink);font-size:clamp(1.3rem,2.4vw,1.7rem)}
 .sim-head .eyebrow{color:var(--yellow)}
 .sim-body{display:grid;grid-template-columns:1fr 1fr;gap:24px 32px;margin-top:28px}
